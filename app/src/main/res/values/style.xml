@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title_login">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+    <style name="titlebar">
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="text">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/poppins</item>
+
+    </style>
+    <style name="text2">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+    <style name="textbox">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="paddingStart">25dp</item>
+    </style>
+    <style name="editbox">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="textberita">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+    <style name="textberita1">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+    <style name="linktext">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+    <style name="date">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#A1A1A1</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+    <style name="textEror">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#FF1C1C</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/blue</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+</resources>
