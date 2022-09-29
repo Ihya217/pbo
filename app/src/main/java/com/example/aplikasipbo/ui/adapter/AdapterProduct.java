@@ -1,35 +1,24 @@
 package com.example.aplikasipbo.ui.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aplikasipbo.ActivityCreate;
-import com.example.aplikasipbo.ActivityUpdate;
+import com.example.aplikasipbo.ui.etc.ActivityUpdate;
 import com.example.aplikasipbo.R;
 import com.example.aplikasipbo.api.base.BaseApiService;
 import com.example.aplikasipbo.api.model.ProductsModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
@@ -39,7 +28,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     private OnItemClickListener listener;
 
     public interface OnItemClickListener{
-        void onItemClick(int id);
+        void onItemClick(int position, int id);
     }
 
     public void setOnItemClickListener(OnItemClickListener clickListener){
@@ -66,6 +55,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             parent_layout = itemView.findViewById(R.id.parentLayout1);
             delete = itemView.findViewById(R.id.menu);
 
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(getAdapterPosition(), 1 );
+                }
+            });
+
 
         }
     }
@@ -86,12 +82,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.desc.setText(productsList.get(position).getIsi());
         ImageButton delete = holder.delete;
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClick(productsList.get(position).getId());
-            }
-        });
+
         parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

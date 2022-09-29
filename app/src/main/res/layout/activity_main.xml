@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.etc.MainActivity"
-    android:background="@color/grey">
+    tools:context=".ui.etc.MainActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,20 +22,40 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:title="Arknights Note"
+            app:subtitle="Supported By : Rhodes Islands"
             app:logo="@drawable/rhodes"
             android:layout_marginStart="-30dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.AplikasiPBO.PopupOverlay" />
+            app:popupTheme="@style/Theme.AplikasiPBO.PopupOverlay" >
+            <ImageView
+                android:id="@+id/wallpaper"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_baseline_menu_24"
+                android:layout_gravity="end"
+                android:layout_marginEnd="35dp"/>
+        </androidx.appcompat.widget.Toolbar>
+
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_marginTop="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/listview"/>
+        <LinearLayout
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/bg2">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/listview"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

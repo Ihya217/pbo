@@ -4,16 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.aplikasipbo.ActivityCreate;
 import com.example.aplikasipbo.R;
 import com.example.aplikasipbo.api.base.BaseApiService;
 import com.example.aplikasipbo.api.koneksi.conn;
 import com.example.aplikasipbo.api.model.ProductsModel;
 import com.example.aplikasipbo.api.response.ProductsResponse;
 import com.example.aplikasipbo.ui.adapter.AdapterProduct;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -22,23 +19,27 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-    List<ProductsModel> semua_data;
+    List<ProductsModel> productsList;
     BaseApiService mApiService1;
     private RecyclerView recyclerView;
     AdapterProduct mAdapter;
+    ImageView wallpaper;
+    LinearLayout bg;
     com.google.android.material.floatingactionbutton.FloatingActionButton add;
 
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(this);
@@ -53,12 +55,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerViewLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new AdapterProduct(this, semua_data);
+        recyclerView.setAdapter(mAdapter);
 
         getData();
 
         add = findViewById(R.id.add);
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     private void getData() {
@@ -84,15 +84,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductsResponse> call, Response<ProductsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    semua_data = response.body().getSemua_data();
-                    recyclerView.setAdapter(new AdapterProduct(MainActivity.this, semua_data));
-                    mAdapter.setOnItemClickListener(new AdapterProduct.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int id) {
-                            Call<Void> call = mApiService1.deleteCatatan(id);
-                            mAdapter.notifyItemRemoved(id);
-                        }
-                    });
+                    productsList = response.body().getSemua_data();
+                    mAdapter = new AdapterProduct(getApplicationContext(),productsList);
+                    recyclerView.setAdapter(mAdapter);
+
+
+
+//                    mAdapter.setOnItemClickListener(new AdapterProduct.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(int position, int id) {
+//                            Call<Void> call = mApiService1.deleteCatatan(id);
+//                            mAdapter.notifyItemRemoved(position);
+//                        }
+//                    });
             }
                 else {
                     Toast.makeText(getApplicationContext(), "Responsenya Gagal", Toast.LENGTH_SHORT).show();
@@ -107,5 +111,47 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Silahkan Refresh", Toast.LENGTH_SHORT).show();
             }
         });
+
+        wallpaper = findViewById(R.id.wallpaper);
+        bg = findViewById(R.id.bg);
+        wallpaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PopupMenu popupMenu = new PopupMenu(MainActivity
+                        .this, view);
+                popupMenu.setOnMenuItemClickListener(MainActivity.this);
+                popupMenu.inflate(R.menu.wallpaper_menu);
+                popupMenu.show();
+
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        bg = findViewById(R.id.bg);
+        switch (menuItem.getItemId()){
+            case R.id.menu1:
+                bg.setBackgroundResource(R.drawable.bg1);
+                break;
+            case R.id.menu2:
+                bg.setBackgroundResource(R.drawable.bg2);
+                break;
+            case R.id.menu3:
+                bg.setBackgroundResource(R.drawable.bg3);
+                break;
+            case R.id.menu4:
+                bg.setBackgroundResource(R.drawable.bg4);
+                break;
+            case R.id.menu5:
+                bg.setBackgroundResource(R.drawable.ihya);
+                break;
+        }
+        return false;
     }
 }

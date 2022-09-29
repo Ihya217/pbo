@@ -31,6 +31,7 @@ public interface BaseApiService {
     @PUT("catatans/{id}")
     Call<ProductsModel> editCatatan(
             @Path("id") int id, @Body ProductsModel productsModel);
+
     @DELETE("catatans/{id}")
     Call<Void> deleteCatatan(@Path("id") int id);
 }

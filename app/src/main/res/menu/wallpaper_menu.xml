@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu1"
+        android:title="Wallpaper Texas"/>
+    <item android:id="@+id/menu2"
+        android:title="Wallpaper W"/>
+    <item android:id="@+id/menu3"
+        android:title="Wallpaper Liskarm"/>
+    <item android:id="@+id/menu4"
+        android:title="Kyaa skadiii 0^0"/>
+    <item android:id="@+id/menu5"
+        android:title="Bahaya >:("/>
+</menu>

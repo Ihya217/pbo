@@ -17,14 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityUpdate"
+            android:name=".ui.etc.ActivityUpdate"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ActivityCreate"
+            android:name=".ui.etc.ActivityCreate"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

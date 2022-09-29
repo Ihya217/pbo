@@ -1,9 +1,8 @@
-package com.example.aplikasipbo;
+package com.example.aplikasipbo.ui.etc;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,12 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.aplikasipbo.R;
 import com.example.aplikasipbo.api.base.BaseApiService;
 import com.example.aplikasipbo.api.koneksi.conn;
 import com.example.aplikasipbo.api.model.ProductsModel;
 
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +49,8 @@ public class ActivityCreate extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<ProductsModel> call, Response<ProductsModel> response) {
                                         Toast.makeText(ActivityCreate.this, "Tersimpan", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(ActivityCreate.this, MainActivity.class);
+                                        startActivity(i);
                                         finish();
                                     }
                                     @Override
