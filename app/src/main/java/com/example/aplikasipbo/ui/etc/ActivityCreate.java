@@ -49,8 +49,6 @@ public class ActivityCreate extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<ProductsModel> call, Response<ProductsModel> response) {
                                         Toast.makeText(ActivityCreate.this, "Tersimpan", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(ActivityCreate.this, MainActivity.class);
-                                        startActivity(i);
                                         finish();
                                     }
                                     @Override

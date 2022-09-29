@@ -101,8 +101,6 @@ public class ActivityUpdate extends AppCompatActivity {
                                 delete.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
-                                        Intent i = new Intent(ActivityUpdate.this, MainActivity.class);
-                                        startActivity(i);
                                         Toast.makeText(ActivityUpdate.this, "Catatan Dihapus", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }

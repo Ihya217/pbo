@@ -18,6 +18,7 @@ import android.util.Log;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     AdapterProduct mAdapter;
     ImageView wallpaper;
     LinearLayout bg;
+    SwipeRefreshLayout refresh;
     com.google.android.material.floatingactionbutton.FloatingActionButton add;
 
 
@@ -56,8 +58,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         recyclerViewLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
         getData();
+
+        refresh = findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setVisibility(View.GONE);
+                getData();
+                recyclerView.setVisibility(View.VISIBLE);
+                refresh.setRefreshing(false);
+            }
+        });
+
 
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
@@ -87,16 +100,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     productsList = response.body().getSemua_data();
                     mAdapter = new AdapterProduct(getApplicationContext(),productsList);
                     recyclerView.setAdapter(mAdapter);
-
-
-
-//                    mAdapter.setOnItemClickListener(new AdapterProduct.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(int position, int id) {
-//                            Call<Void> call = mApiService1.deleteCatatan(id);
-//                            mAdapter.notifyItemRemoved(position);
-//                        }
-//                    });
             }
                 else {
                     Toast.makeText(getApplicationContext(), "Responsenya Gagal", Toast.LENGTH_SHORT).show();
@@ -128,8 +131,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         });
 
-
-
     }
 
     @Override
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         switch (menuItem.getItemId()){
             case R.id.menu1:
                 bg.setBackgroundResource(R.drawable.bg1);
+
                 break;
             case R.id.menu2:
                 bg.setBackgroundResource(R.drawable.bg2);
@@ -154,4 +156,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         return false;
     }
+
+
 }

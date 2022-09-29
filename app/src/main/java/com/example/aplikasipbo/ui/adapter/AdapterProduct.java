@@ -25,15 +25,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     private List<ProductsModel> productsList;
     Context mcontext;
     BaseApiService mApiservice;
-    private OnItemClickListener listener;
-
-    public interface OnItemClickListener{
-        void onItemClick(int position, int id);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener clickListener){
-        listener = clickListener;
-    }
 
 
    public AdapterProduct(Context mcontext, List<ProductsModel> productsList) {
@@ -48,20 +39,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         LinearLayout parent_layout;
         ImageButton delete;
 
-        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleText);
             desc = itemView.findViewById(R.id.descText);
             parent_layout = itemView.findViewById(R.id.parentLayout1);
             delete = itemView.findViewById(R.id.menu);
-
-            delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(getAdapterPosition(), 1 );
-                }
-            });
-
 
         }
     }
@@ -71,7 +54,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     @Override
     public AdapterProduct.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview,parent,false);
-        return  new ViewHolder(view, listener);
+        return  new ViewHolder(view);
     }
 
     @Override
@@ -80,7 +63,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         LinearLayout parent_layout = holder.parent_layout;
         holder.title.setText(productsList.get(position).getJudul());
         holder.desc.setText(productsList.get(position).getIsi());
-        ImageButton delete = holder.delete;
 
 
         parent_layout.setOnClickListener(new View.OnClickListener() {
